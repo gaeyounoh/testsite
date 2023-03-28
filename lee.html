@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서신 생성기 200서버 대의맹 기록실 제공</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    
+    label:first-of-type {
+      margin-top: 0;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3e8e41;
+    }
+
+    .result {
+      margin-top: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .copy {
+      margin-top: 20px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <h1>일반 서신 생성기</h1>
+  <form>
+    <label for="date">날짜</label>
+    <input type="date" id="date">
+
+    <label for="line1"></label>
+    <textarea id="line1" rows="2"></textarea>
+
+    <label for="line2"></label>
+    <textarea id="line2" rows="2"></textarea>
+
+    <label for="line3"></label>
+    <textarea id="line3" rows="2"></textarea>
+
+    <label for="line4"></label>
+    <textarea id="line4" rows="2"></textarea>
+
+    <label for="line5"></label>
+    <textarea id="line5" rows="2"></textarea>
+
+    <label for="line6"></label>
+    <textarea id="line6" rows="2"></textarea>
+
+    <label for="symbol1">1번줄 컬러:</label>
+    <select id="symbol1">
+      <option value="">없음</option>
+      <option value="@">@</option>
+      <option value="#">#</option>
+      <option value="&">&</option>
+      <option value="$">$</option>
+    </select>
+
+    <label for="symbol2">2번줄 컬러:</label>
+    <select id="symbol2">
+      <option value="">없음</option>
+      <option value="@">@</option>
+      <option value="#">#</option>
+      <option value="&">&</option>
+      <option value="$">$</option>
+    </select>
+
+    <label for="symbol3">3번줄 컬러:</label>
+<select id="symbol3">
+  <option value="">없음</option>
+  <option value="@">@</option>
+  <option value="#">#</option>
+  <option value="&">&</option>
+  <option value="$">$</option>
+</select>
+
+<label for="symbol4">4번줄 컬러:</label>
+<select id="symbol4">
+  <option value="">없음</option>
+  <option value="@">@</option>
+  <option value="#">#</option>
+  <option value="&">&</option>
+  <option value="$">$</option>
+</select>
+
+<label for="symbol5">5번줄 컬러:</label>
+<select id="symbol5">
+  <option value="">없음</option>
+  <option value="@">@</option>
+  <option value="#">#</option>
+  <option value="&">&</option>
+  <option value="$">$</option>
+</select>
+
+<label for="symbol6">6번줄 컬러:</label>
+<select id="symbol6">
+  <option value="">없음</option>
+  <option value="@">@</option>
+  <option value="#">#</option>
+  <option value="&">&</option>
+  <option value="$">$</option>
+</select>
+
+<button type="button" id="generate">생성하기</button>
+
+<div class="result" id="result"></div>
+
+<div class="copy">
+  <button type="button" id="copy">복사</button>
+</div>
+  </form>
+  <script>
+    // 선택한 색상 기호를 문자열에 적용하여 반환합니다.
+    function applySymbol(symbol, text) {
+      const symbolDict = { "@": `@${text}@`, "#": `#${text}#`, "&": `&${text}&`, "$": `$${text}$` };
+      return symbolDict[symbol] || text;
+    }
+
+   // 서신을 생성하고 결과 칸에 표시합니다.
+function generateLetter() {
+  const line1 = applySymbol(document.getElementById("symbol1").value, document.getElementById("line1").value);
+  const line2 = applySymbol(document.getElementById("symbol2").value, document.getElementById("line2").value);
+  const line3 = applySymbol(document.getElementById("symbol3").value, document.getElementById("line3").value);
+  const line4 = applySymbol(document.getElementById("symbol4").value, document.getElementById("line4").value);
+  const line5 = applySymbol(document.getElementById("symbol5").value, document.getElementById("line5").value);
+  const line6 = applySymbol(document.getElementById("symbol6").value, document.getElementById("line6").value);
+
+  const date = document.getElementById("date").value;
+  const letter = `안내 사항\n\n ${line1}\n ${line2}\n ${line3}\n ${line4}\n ${line5}\n ${line6}\n\n${date ? `날짜: ${date}\n` : ""}`;
+
+  document.getElementById("result").textContent = letter;
+}
+
+
+    // 결과 칸의 내용을 클립보드로 복사합니다.
+    function copyText() {
+      const result = document.getElementById("result").innerText.trim();
+      navigator.clipboard.writeText(result);
+      alert("텍스트가 클립보드에 복사되었습니다.");
+}
+// 버튼 클릭 이벤트를 연결합니다.
+document.getElementById("generate").addEventListener("click", generateLetter);
+document.getElementById("copy").addEventListener("click", copyText);
+  </script>
+</body>
+</html>
+200서버 대의맹 화산질풍검
